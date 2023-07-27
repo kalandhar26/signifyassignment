@@ -39,6 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
         final String methodName = "ReviewServiceImpl-addStoreReview";
         log.info(ReviewConstants.LOGGER_IN, methodName);
         try {
+
             Review review = Review.builder()
                     .review(reviewRequestDto.getReview())
                     .author(reviewRequestDto.getAuthor())
@@ -52,10 +53,11 @@ public class ReviewServiceImpl implements ReviewService {
             reviewRepository.save(review);
             log.info("review with id- {} is saved", review.getId());
             log.info(ReviewConstants.LOGGER_OUT, methodName);
+
             return "Review Added Successfully.!";
         } catch (Exception e) {
             log.info(ReviewConstants.EXCEPTION_LOGGER, e.getMessage());
-            return "Failed to save the review. Please try again later.";
+            throw new ResourceNotFoundException();
         }
     }
 
@@ -103,7 +105,7 @@ public class ReviewServiceImpl implements ReviewService {
             return ReviewsListDto.builder().reviews(filteredReviewsList).build();
         } catch (Exception e) {
             log.info("Error occurred while filtering reviews: {}", e.getMessage(), e);
-           // throw new RuntimeException("Error occurred while filtering reviews", e);
+            // throw new RuntimeException("Error occurred while filtering reviews", e);
             throw new ResourceNotFoundException();
         }
     }
@@ -136,7 +138,7 @@ public class ReviewServiceImpl implements ReviewService {
             return averageMonthlyRatings;
         } catch (Exception e) {
             log.error("Error occurred while calculating average monthly ratings per store: {}", e.getMessage(), e);
-           // throw new RuntimeException("Error occurred while calculating average monthly ratings per store", e);
+            // throw new RuntimeException("Error occurred while calculating average monthly ratings per store", e);
             throw new ResourceNotFoundException();
         }
     }
@@ -166,7 +168,7 @@ public class ReviewServiceImpl implements ReviewService {
         } catch (Exception e) {
             // Log the exception with an appropriate log level (e.g., ERROR)
             log.error("Error occurred while calculating average monthly rating for store: {}", e.getMessage(), e);
-          //  throw new RuntimeException("Error occurred while calculating average monthly ratings per store", e);
+            //  throw new RuntimeException("Error occurred while calculating average monthly ratings per store", e);
             throw new ResourceNotFoundException();
         }
     }
@@ -198,8 +200,6 @@ public class ReviewServiceImpl implements ReviewService {
             log.error("Error occurred while calculating total ratings by category: {}", e.getMessage(), e);
             // throw new RuntimeException("Error occurred while calculating total ratings by category", e);
             throw new ResourceNotFoundException();
-        }
+         }
     }
-
-
 }
