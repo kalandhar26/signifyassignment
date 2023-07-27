@@ -1,5 +1,6 @@
 package com.signify.reviews.Alexa_Reviews.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,5 +34,6 @@ public class Review {
 
     private String product_name;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime reviewed_date;
 }
