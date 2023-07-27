@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -31,10 +30,6 @@ public class ReviewServiceImplTest {
     @InjectMocks
     private ReviewServiceImpl reviewService;
 
-//    @BeforeEach
-//    public void setUp() {
-//        MockitoAnnotations.openMocks(this);
-//    }
 
     /**
      * Test case to verify the successful addition of a single store review.
@@ -74,10 +69,11 @@ public class ReviewServiceImplTest {
         when(reviewRepository.save(any(Review.class))).thenThrow(new RuntimeException());
 
         // Execute
-        String result = reviewService.addStoreReview(reviewRequestDto);
+        Throwable exception = assertThrows(RuntimeException.class,
+                () -> reviewService.addStoreReview(reviewRequestDto));
 
         // Verify
-        assertEquals("Failed to save the review. Please try again later.", result);
+        assertNotNull(exception);
         verify(reviewRepository, times(1)).save(any(Review.class));
     }
 
@@ -128,19 +124,21 @@ public class ReviewServiceImplTest {
     /**
      * Test case to verify the failure to add multiple store reviews due to an exception.
      */
+
     @Test
     public void testAddStoreReviews_Failure() {
-        // Mock
-        when(reviewRepository.saveAll(anyList())).thenThrow(new RuntimeException());
+        // Mock the behavior of the reviewRepository.saveAll() method to throw a ResourceNotFoundException
+        when(reviewRepository.saveAll(anyList())).thenThrow(new ResourceNotFoundException());
 
         ReviewsListDto reviewsListDto = new ReviewsListDto();
         reviewsListDto.setReviews(new ArrayList<>());
 
         // Execute
-        String result = reviewService.addStoreReviews(reviewsListDto);
+        Throwable exception = assertThrows(ResourceNotFoundException.class,
+                () -> reviewService.addStoreReviews(reviewsListDto));
 
         // Verify
-        assertEquals("Failed to save the reviews. Please try again later.", result);
+        assertNotNull(exception);
         verify(reviewRepository, times(1)).saveAll(anyList());
     }
 

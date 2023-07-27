@@ -1,0 +1,5 @@
+com\signify\reviews\Alexa_Reviews\exceptions\ErrorSeverity.class
+com\signify\reviews\Alexa_Reviews\exceptions\ResourceNotFoundException.class
+com\signify\reviews\Alexa_Reviews\exceptions\ExceptionDetails.class
+com\signify\reviews\Alexa_Reviews\exceptions\ErrorResponse.class
+com\signify\reviews\Alexa_Reviews\exceptions\ExceptionDetails$ExceptionDetailsBuilder.class
