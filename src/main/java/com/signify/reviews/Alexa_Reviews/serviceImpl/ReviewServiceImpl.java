@@ -57,6 +57,7 @@ public class ReviewServiceImpl implements ReviewService {
             return "Review Added Successfully.!";
         } catch (Exception e) {
             log.info(ReviewConstants.EXCEPTION_LOGGER, e.getMessage());
+            // throw new RuntimeException("Failed to add Review", e);
             throw new ResourceNotFoundException();
         }
     }
@@ -80,7 +81,8 @@ public class ReviewServiceImpl implements ReviewService {
             return allSaved ? "Reviews Saved Successfully :)" : "Some reviews could not be saved :(";
         } catch (Exception e) {
             log.info(ReviewConstants.EXCEPTION_LOGGER, e.getMessage());
-            return "Failed to save the reviews. Please try again later.";
+           // throw new RuntimeException("Failed to save the reviews. Please try again later.", e);
+            throw new ResourceNotFoundException();
         }
 
     }
