@@ -1,0 +1,16 @@
+{
+  "Swagger-Application-Security": {
+    "type": "generic application",
+    "Url": "http://reviews.com",
+    "flow": "application",
+    "scopes": {
+      "api:test-swagger": "This Api is responsible to test swagger docs",
+      "write:review": "Write a new review for a store",
+      "write:reviews": "Write multiple reviews for stores",
+      "read:reviews": "Read reviews based on filters",
+      "read:average-monthly-ratings": "Read average monthly ratings per store",
+      "read:average-monthly-ratings-for-store": "Read average monthly rating for a specific store",
+      "read:total-ratings-by-category": "Read total ratings by rating category"
+    }
+  }
+}

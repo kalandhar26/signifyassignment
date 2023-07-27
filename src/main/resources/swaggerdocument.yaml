@@ -1,0 +1,402 @@
+---
+swagger: "2.0"
+info:
+  description: "This Project handles reviews for Stores"
+  version: "1.0.0"
+  title: "Review API Application"
+  contact:
+    name: "BabaKalandhar"
+    url: "http://localhost:8081/review"
+    email: "babakalandhar499@gmail.com"
+host: "http"
+basePath: "/review"
+tags:
+- name: "Review API"
+schemes:
+- "http"
+paths:
+  /review/addStoreReview:
+    post:
+      tags:
+      - "Review API"
+      summary: "Add a single review"
+      description: "Add a new review for a store"
+      operationId: "addStoreReview"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Review data to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/ReviewRequestDto"
+      - name: "Authorization"
+        in: "header"
+        description: "Authorization token"
+        required: true
+        type: "string"
+        x-example: "Bearer <your_access_token>"
+      - name: "Scope"
+        in: "header"
+        description: "Scope required: write:review"
+        required: true
+        type: "string"
+        x-example: "write:review"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        201:
+          description: "Created"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+      - Swagger-Application-Security:
+        - "write:review"
+  /review/addStoreReviews:
+    post:
+      tags:
+      - "Review API"
+      summary: "Add multiple reviews"
+      description: "Add multiple reviews for stores"
+      operationId: "addStoreReviews"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "List of review data to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/ReviewsListDto"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        201:
+          description: "Created"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+      - Swagger-Application-Security:
+        - "write:reviews"
+  /review/averageMonthlyRatings:
+    get:
+      tags:
+      - "Review API"
+      summary: "Get average monthly ratings per store"
+      description: "Get the average monthly ratings for each store"
+      operationId: "getAverageMonthlyRatingsPerStore"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AverageMonthlyRatingsPerStoreResponseDto"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+      - Swagger-Application-Security:
+        - "read:averageMonthlyRatings"
+  /review/averageMonthlyRatings/{reviewSource}:
+    get:
+      tags:
+      - "Review API"
+      summary: "Get average monthly rating for a specific store"
+      description: "Get the average monthly rating for a specific store based on the\
+        \ store source"
+      operationId: "getAverageMonthlyRatingsForStore"
+      parameters:
+      - name: "reviewSource"
+        in: "path"
+        description: "Store source for which to fetch average monthly rating"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AverageMonthlyRatingForSpecificStoreResponseDto"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+      - Swagger-Application-Security:
+        - "read:averageMonthlyRatingsForStore"
+  /review/fetchReviews:
+    get:
+      tags:
+      - "Review API"
+      summary: "Fetch reviews with optional filters"
+      description: "Fetch reviews based on filters like date, store source, and rating"
+      operationId: "getReviewsByFilters"
+      parameters:
+      - name: "reviewed_date"
+        in: "query"
+        description: "Filter reviews by date (optional)"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "source"
+        in: "query"
+        description: "Filter reviews by store source (optional)"
+        required: false
+        type: "string"
+      - name: "rating"
+        in: "query"
+        description: "Filter reviews by rating (optional)"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ReviewsListDto"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+      - Swagger-Application-Security:
+        - "read:reviews"
+  /review/totalRatingsByCategory:
+    get:
+      tags:
+      - "Review API"
+      summary: "Get total ratings by rating category"
+      description: "Get the total number of ratings for each rating category (1 to\
+        \ 5)"
+      operationId: "getTotalRatingsByCategory"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/TotalRatingsByCategoryResponseDto"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+      - Swagger-Application-Security:
+        - "read:totalRatingsByCategory"
+securityDefinitions: {}
+definitions:
+  AverageMonthlyRatingForSpecificStoreResponseDto:
+    type: "object"
+    properties:
+      averageMonthlyRatingsForSpecificStore:
+        type: "object"
+        example: "{\"2023-01\": 4.5, \"2023-02\": 4.0}"
+        description: "Map with Month-Year as key and average rating as value for a\
+          \ specific store."
+        additionalProperties:
+          type: "object"
+    description: "stores average monthly ratings for a specific store."
+  AverageMonthlyRatingsPerStoreResponseDto:
+    type: "object"
+    properties:
+      averageMonthlyRatingsPerStore:
+        type: "object"
+        example: "{\"Store1\":{\"2023-01\": 4.5, \"2023-02\": 4.0}, \"Store2\":{\"\
+          2023-01\": 3.5, \"2023-02\": 3.0}}"
+        description: "Map with Store Type as key and another Map with Month-Year as\
+          \ key and average rating as value as value."
+        additionalProperties:
+          type: "object"
+    description: " stores average monthly ratings of all stores."
+  ErrorResponse:
+    type: "object"
+    properties:
+      error:
+        $ref: "#/definitions/ExceptionDetails"
+    description: "This is the Response for Custom Exception in Application"
+  ExceptionDetails:
+    type: "object"
+    properties:
+      severity:
+        type: "string"
+        example: "critical"
+        description: "severity"
+        enum:
+        - "error"
+        - "critical"
+        - "warning"
+        - "info"
+      code:
+        type: "string"
+        example: "errorParseFailed"
+        description: "code"
+      message:
+        type: "string"
+        example: "Unexpected EOF"
+        description: "message"
+      source:
+        type: "string"
+        example: "system76"
+        description: "source"
+      target:
+        type: "string"
+        example: "system76"
+        description: "target"
+      innerErrors:
+        type: "array"
+        example: "[{\"severity\":\"critical\",\"code\":\"errorParseFailed\"}]"
+        description: "innerErrors"
+        items:
+          $ref: "#/definitions/ExceptionDetails"
+    description: "This is Application Specific Exception Object"
+  ReviewRequestDto:
+    type: "object"
+    properties:
+      review:
+        type: "string"
+        example: "This product is amazing!"
+        description: "The review text."
+      author:
+        type: "string"
+        example: "Baba Kalandhar"
+        description: "The author of the review."
+      review_source:
+        type: "string"
+        example: "Store1"
+        description: "The source/store of the review."
+      rating:
+        type: "integer"
+        format: "int32"
+        example: 5
+        description: "The rating of the review."
+      title:
+        type: "string"
+        example: "Great product!"
+        description: "The title of the review."
+      product_name:
+        type: "string"
+        example: "Product XYZ"
+        description: "The name of the product."
+      reviewed_date:
+        type: "string"
+        format: "date-time"
+        example: "2023-01-15T12:30:00"
+        description: "The date when the review was reviewed."
+    description: "DTO for a single review request."
+  ReviewsListDto:
+    type: "object"
+    properties:
+      reviews:
+        type: "array"
+        example: "[{\"key1\":\"Value1\",\"key2\":\"Value2\"}]"
+        description: "List of reviews."
+        items:
+          type: "object"
+    description: "DTO for a list of reviews."
+  TotalRatingsByCategoryResponseDto:
+    type: "object"
+    properties:
+      totalRatingsByCategory:
+        type: "object"
+        example: "{\"5\": 100, \"4\": 50, \"3\": 20, \"2\": 10, \"1\": 5}"
+        description: "Map with Category as key (5*, 4*, 3*, ...) and Total Ratings\
+          \ as value."
+        additionalProperties:
+          type: "object"
+    description: "stores total ratings by category."
