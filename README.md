@@ -30,29 +30,28 @@ The application provides API documentation using Swagger. After running the appl
 
 ## Available Endpoints:
 POST /review/addStoreReview: Add a single review for a store.
-
 Request body: ReviewRequestDto
 Response: String (Success message)
-POST /review/addStoreReviews: Add multiple reviews for stores.
 
+POST /review/addStoreReviews: Add multiple reviews for stores.
 Request body: ReviewsListDto
 Response: String (Success message)
-GET /review/fetchReviews: Fetch reviews with optional filters.
 
+GET /review/fetchReviews: Fetch reviews with optional filters.
 Query parameters:
 reviewed_date: Filter reviews by date (optional)
 source: Filter reviews by store source (optional)
 rating: Filter reviews by rating (optional)
 Response: ReviewsListDto
+
 GET /review/averageMonthlyRatings: Get average monthly ratings per store.
-
 Response: AverageMonthlyRatingsPerStoreResponseDto
-GET /review/averageMonthlyRatings/{reviewSource}: Get average monthly rating for a specific store.
 
+GET /review/averageMonthlyRatings/{reviewSource}: Get average monthly rating for a specific store.
 Path parameter: reviewSource (Store source for which to fetch average monthly rating)
 Response: AverageMonthlyRatingForSpecificStoreResponseDto
-GET /review/totalRatingsByCategory: Get total ratings by rating category.
 
+GET /review/totalRatingsByCategory: Get total ratings by rating category.
 Response: TotalRatingsByCategoryResponseDto
 
 ## Error Handling
