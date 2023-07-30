@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
  * Test class for {@link ReviewServiceImpl} to verify its behavior. It includes Junits for Testing
  */
 @ExtendWith(MockitoExtension.class)
-public class ReviewServiceImplTest {
+class ReviewServiceImplTest {
 
     @Mock
     private ReviewRepository reviewRepository;
@@ -35,7 +35,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the successful addition of a single store review.
      */
     @Test
-    public void testAddStoreReview_Success() {
+    void testAddStoreReview_Success() {
         // Prepare
         ReviewRequestDto reviewRequestDto = new ReviewRequestDto();
         reviewRequestDto.setReview("Good product");
@@ -61,7 +61,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the failure to add a single store review due to an exception.
      */
     @Test
-    public void testAddStoreReview_Failure() {
+    void testAddStoreReview_Failure() {
         // Prepare
         ReviewRequestDto reviewRequestDto = new ReviewRequestDto();
 
@@ -81,7 +81,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the successful addition of multiple store reviews.
      */
     @Test
-    public void testAddStoreReviews_Success() {
+    void testAddStoreReviews_Success() {
         // Prepare
         List<Review> reviews = new ArrayList<>();
         Review review1 = Review.builder()
@@ -126,7 +126,7 @@ public class ReviewServiceImplTest {
      */
 
     @Test
-    public void testAddStoreReviews_Failure() {
+     void testAddStoreReviews_Failure() {
         // Mock the behavior of the reviewRepository.saveAll() method to throw a ResourceNotFoundException
         when(reviewRepository.saveAll(anyList())).thenThrow(new ResourceNotFoundException());
 
@@ -146,7 +146,7 @@ public class ReviewServiceImplTest {
      * Test case to verify filtering reviews based on various filter combinations when all parameters are null.
      */
     @Test
-    public void testFilterReviewsByDateOrStoreOrRating_AllNullParameters() {
+     void testFilterReviewsByDateOrStoreOrRating_AllNullParameters() {
         // Prepare
         List<Review> reviews = new ArrayList<>();
         Review review1 = new Review();
@@ -169,7 +169,7 @@ public class ReviewServiceImplTest {
      * Test case to verify filtering reviews by date parameter.
      */
     @Test
-    public void testFilterReviewsByDateOrStoreOrRating_WithDateParameter() {
+     void testFilterReviewsByDateOrStoreOrRating_WithDateParameter() {
         // Prepare
         List<Review> reviews = new ArrayList<>();
         Review review1 = new Review();
@@ -194,7 +194,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the ResourceNotFoundException when filtering reviews throws an exception.
      */
     @Test
-    public void testFilterReviewsByDateOrStoreOrRating_ResourceNotFoundException() {
+     void testFilterReviewsByDateOrStoreOrRating_ResourceNotFoundException() {
         // Mock
         when(reviewRepository.findAll()).thenThrow(new RuntimeException());
 
@@ -208,7 +208,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the successful retrieval of average monthly ratings per store.
      */
     @Test
-    public void testGetAverageMonthlyRatingsPerStore() {
+     void testGetAverageMonthlyRatingsPerStore() {
         // Prepare
         List<Review> reviews = new ArrayList<>();
         Review review1 = new Review();
@@ -238,7 +238,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the successful retrieval of average monthly rating for a specific store.
      */
     @Test
-    public void testGetAverageMonthlyRatingForStore_Success() {
+     void testGetAverageMonthlyRatingForStore_Success() {
         // Prepare test data
         String reviewSource = "Amazon";
         List<Review> reviews = new ArrayList<>();
@@ -268,7 +268,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the retrieval of average monthly rating for a specific store when no reviews are found.
      */
     @Test
-    public void testGetAverageMonthlyRatingForStore_NoReviewsFound() {
+     void testGetAverageMonthlyRatingForStore_NoReviewsFound() {
         // Prepare test data
         String reviewSource = "Amazon";
         List<Review> reviews = new ArrayList<>();
@@ -293,7 +293,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the successful retrieval of total ratings by category.
      */
     @Test
-    public void testGetTotalRatingsByCategory_Success() {
+     void testGetTotalRatingsByCategory_Success() {
         // Prepare test data
         List<Review> reviews = new ArrayList<>();
         Review review1 = new Review(1L, "Good product", "Baba", "iTunes", 5, "Great product", "Product XYZ", LocalDateTime.now());
@@ -333,7 +333,7 @@ public class ReviewServiceImplTest {
      * Test case to verify the retrieval of total ratings by category when no reviews are found.
      */
     @Test
-    public void testGetTotalRatingsByCategory_NoReviewsFound() {
+     void testGetTotalRatingsByCategory_NoReviewsFound() {
         // Prepare test data
         List<Review> reviews = new ArrayList<>();
 

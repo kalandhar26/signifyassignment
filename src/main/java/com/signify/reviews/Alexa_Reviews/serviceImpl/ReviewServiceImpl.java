@@ -49,7 +49,8 @@ public class ReviewServiceImpl implements ReviewService {
                     .product_name(reviewRequestDto.getProduct_name())
                     .reviewed_date(reviewRequestDto.getReviewed_date())
                     .build();
-
+            // This line is just to check exception response
+            // System.out.println(10/0);
             reviewRepository.save(review);
             log.info("review with id- {} is saved", review.getId());
             log.info(ReviewConstants.LOGGER_OUT, methodName);
@@ -81,7 +82,7 @@ public class ReviewServiceImpl implements ReviewService {
             return allSaved ? "Reviews Saved Successfully :)" : "Some reviews could not be saved :(";
         } catch (Exception e) {
             log.info(ReviewConstants.EXCEPTION_LOGGER, e.getMessage());
-           // throw new RuntimeException("Failed to save the reviews. Please try again later.", e);
+            // throw new RuntimeException("Failed to save the reviews. Please try again later.", e);
             throw new ResourceNotFoundException();
         }
 
@@ -202,6 +203,6 @@ public class ReviewServiceImpl implements ReviewService {
             log.error("Error occurred while calculating total ratings by category: {}", e.getMessage(), e);
             // throw new RuntimeException("Error occurred while calculating total ratings by category", e);
             throw new ResourceNotFoundException();
-         }
+        }
     }
 }

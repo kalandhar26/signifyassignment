@@ -12,7 +12,6 @@ A:\Signify Assignment\Alexa_Reviews\src\main\java\com\signify\reviews\Alexa_Revi
 A:\Signify Assignment\Alexa_Reviews\src\main\java\com\signify\reviews\Alexa_Reviews\dto\ReviewsListDto.java
 A:\Signify Assignment\Alexa_Reviews\src\main\java\com\signify\reviews\Alexa_Reviews\AlexaReviewsApplication.java
 A:\Signify Assignment\Alexa_Reviews\src\main\java\com\signify\reviews\Alexa_Reviews\entities\Review.java
-A:\Signify Assignment\Alexa_Reviews\src\main\java\com\signify\reviews\Alexa_Reviews\config\CorsConfiguration.java
 A:\Signify Assignment\Alexa_Reviews\src\main\java\com\signify\reviews\Alexa_Reviews\controller\ReviewController.java
 A:\Signify Assignment\Alexa_Reviews\src\main\java\com\signify\reviews\Alexa_Reviews\dto\ReviewResponseDto.java
 A:\Signify Assignment\Alexa_Reviews\src\main\java\com\signify\reviews\Alexa_Reviews\exceptions\ResourceNotFoundException.java

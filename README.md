@@ -12,7 +12,7 @@ Apache Maven
 Git
 
 ## Clone the Repository:
-Clone the repository to your local machine using the following command: git clone https://github.com/your-username/Alexa_Reviews.git
+Clone the repository to your local machine using the following command: git clone https://github.com/kalandhar26/Alexa_Reviews.git
 
 ## Build the Application:
 Change directory to the cloned repository and build the application using Maven:

@@ -16,7 +16,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/review")
 @RequiredArgsConstructor
-@CrossOrigin
 @Api(value = "Review Controller", tags = "Review API")
 public class ReviewController {
 
